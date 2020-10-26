@@ -1,0 +1,66 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+}
+
+@mixin creatorStyles($containerId, $base-color, $base-letter) {
+  .container-#{$containerId} {
+    display: grid;
+    grid-template-columns: repeat(4, 100px) 120px repeat(4, 100px);
+    grid-template-rows: 100px;
+    font-family: monospace;
+    text-align: center;
+
+    $i: 1;
+    $amountDarken: 8%;
+    $amountLighten: 8%;
+
+    @while $i <= 4 {
+      .box-darken-#{$i} {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: darken($color: $base-color, $amount: $amountDarken);
+        color: darken($color: $base-letter, $amount: $amountDarken);
+        border-radius: 0.5rem;
+        padding: 1px;
+        margin: 5px;
+      }
+
+      .box-lighten-#{$i} {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: lighten($color: $base-color, $amount: $amountLighten);
+        color: lighten($color: $base-letter, $amount: $amountLighten);
+        border-radius: 0.5rem;
+        padding: 1px;
+        margin: 5px;
+      }
+
+      .box-base-color {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: $base-color;
+        color: white;
+        border-radius: 0.5rem;
+        padding: 1px;
+        margin: 5px;
+      }
+      $i: $i + 1;
+      $amountDarken: $amountDarken + 8%;
+      $amountLighten: $amountLighten + 8%;
+    }
+  }
+}
+
+@include creatorStyles(1, #00bfd6, #9a12b3);
+@include creatorStyles(2, #00dab5, #6930c3);
+@include creatorStyles(3, #9a5fb1, #00bfd6);
